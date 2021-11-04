@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
          overrides the shouldOverrideUrlLoading() method.
          */
         web.setWebViewClient(new Callback());
-        web.loadUrl("http://www.SandipBhattacharya.com");
+        web.loadUrl("http://SandipBhattacharya.com");
     }
 
     private class Callback extends WebViewClient {
@@ -64,9 +64,19 @@ public class MainActivity extends AppCompatActivity {
         Enjoy!
          */
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url.startsWith("http") || url.startsWith("https")) {
+
+            // Open some links (it can be external links also) on Chrome
+            // or any default web browser.
+            // For example: following code will open contact.php
+            // in Chrome or any default web browser of your mobile.
+            /*if (url.equalsIgnoreCase("http://sandipBhattacharya.com/contact.php") || url.equalsIgnoreCase("https://sandipbhattacharya.com/contact.php")) {
+                view.getContext().startActivity(
+                        new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                return true;
+            } else{
                 return false;
             }
+            */
             if (url.startsWith("intent")) {
                 try {
                     Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
@@ -87,8 +97,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
             view.loadUrl(url);
-            return true;
+            return false;
         }
+
     }
 
     // Additional code.
